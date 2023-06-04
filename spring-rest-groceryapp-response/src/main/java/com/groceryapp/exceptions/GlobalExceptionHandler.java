@@ -81,26 +81,25 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 
 	}
 	@ExceptionHandler(GroceryNotfoundException.class)
-	public ResponseEntity<Object> handleBookNotFound(GroceryNotfoundException ex){
+	public ResponseEntity<Object> handleGroceryNotfound(GroceryNotfoundException ex){
 		String message=ex.getMessage();
-		List<Object> error=Arrays.asList("book not available");
+		List<Object> error=Arrays.asList("grocery not available");
 		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info","book not found");
+		httpHeaders.add("info","grocery not found");
 		ApiErrors errors=
 				new ApiErrors(LocalDateTime.now(),message,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.INTERNAL_SERVER_ERROR.value(),error);
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders).body(errors);
 		
 	}
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<Object> handleBookNotFound(Exception ex){
+	public ResponseEntity<Object> handleException(Exception ex){
 		String message=ex.getMessage();
 		List<Object> error=Arrays.asList("other");
 		HttpHeaders httpHeaders=new HttpHeaders();
 		httpHeaders.add("info","other exceptions raised");
 		ApiErrors errors=
 				new ApiErrors(LocalDateTime.now(),message,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.INTERNAL_SERVER_ERROR.value(),error);
-		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders).body(errors);
-		
-	}
-	
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders).body(errors);	
+	}	
 }
+
