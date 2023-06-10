@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-
 import com.groceryapp.model.ApiErrors;
 
 @ControllerAdvice
@@ -86,6 +85,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		List<Object> error=Arrays.asList("grocery not available");
 		HttpHeaders httpHeaders=new HttpHeaders();
 		httpHeaders.add("info","grocery not found");
+		ApiErrors errors=
+				new ApiErrors(LocalDateTime.now(),message,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.INTERNAL_SERVER_ERROR.value(),error);
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders).body(errors);
+		
+	}
+	@ExceptionHandler(UserNotFoundException.class)
+	public ResponseEntity<Object> handleUserNotfound(UserNotFoundException ex){
+		String message=ex.getMessage();
+		List<Object> error=Arrays.asList("user not available");
+		HttpHeaders httpHeaders=new HttpHeaders();
+		httpHeaders.add("info","user not found");
 		ApiErrors errors=
 				new ApiErrors(LocalDateTime.now(),message,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.INTERNAL_SERVER_ERROR.value(),error);
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders).body(errors);

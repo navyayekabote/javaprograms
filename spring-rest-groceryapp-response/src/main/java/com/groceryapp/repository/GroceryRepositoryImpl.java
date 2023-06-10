@@ -17,7 +17,7 @@ public class GroceryRepositoryImpl implements IGroceryRepository{
 	private JdbcTemplate jdbcTempate;
 	@Override
 	public void addGrocery(Grocery grocery) {
-		String sql="insert into grocery (groceryId,name,brand,category,price,size)values(groceryseq.nextval,?,?,?,?,?)";
+		String sql="insert into grocery (groceryId,name,brand,category,price,gsize)values(groceryseq.nextval,?,?,?,?,?)";
 		Object groceryAry[]= {grocery.getGroceryName(),grocery.getBrand(),grocery.getCategory(),grocery.getPrice(),grocery.getSize()};
 		jdbcTempate.update(sql, groceryAry);
 	}
@@ -88,7 +88,7 @@ public class GroceryRepositoryImpl implements IGroceryRepository{
 
 	@Override
 	public List<Grocery> findByNameBrandSize(String name, String brand, String size) {
-		String sql="select * from grocery where name=? and brand=? and size=?";
+		String sql="select * from grocery where name=? and brand=? and gsize=?";
 		return jdbcTempate.query(sql, new GroceryMapper(),name,brand,size);
 	}
 

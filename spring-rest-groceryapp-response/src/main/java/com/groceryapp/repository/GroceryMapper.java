@@ -17,7 +17,7 @@ public class GroceryMapper implements RowMapper<Grocery>{
 		grocery.setCategory(rs.getString("category"));
 		grocery.setBrand(rs.getString("brand"));
 		grocery.setPrice(rs.getDouble("price"));
-		grocery.setSize(rs.getString("size"));
+		grocery.setSize(rs.getString("gsize"));
 		return grocery;
 	}
 
