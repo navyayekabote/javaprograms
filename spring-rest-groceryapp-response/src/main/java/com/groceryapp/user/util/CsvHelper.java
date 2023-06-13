@@ -8,10 +8,11 @@ import java.util.List;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.stereotype.Component;
 
 import com.groceryapp.user.model.UserDTO;
 //import com.opencsv.CSVParser;
-
+@Component
 public class CsvHelper {
 	public static final String TYPE="text/csv";
 	public static String[] headers = {"firstName","middleName","lastName","dateOfBirth","city","email","petName"};
@@ -24,13 +25,13 @@ public class CsvHelper {
 
 	List<CSVRecord> records = parser.getRecords();
 	for (CSVRecord csvRecord:records) {
-	String firstName = csvRecord.get("firstNname");
-	String middleName = csvRecord.get("middleNname");
-	String lastName = csvRecord.get("lastNname");
+	String firstName = csvRecord.get("firstName");
+	String middleName = csvRecord.get("middleName");
+	String lastName = csvRecord.get("lastName");
 	String dateOfBirth = csvRecord.get("dateOfBirth");
 	String city = csvRecord.get("city");
 	String email = csvRecord.get("email");
-	String petName = csvRecord.get("petNname");
+	String petName = csvRecord.get("petName");
 	UserDTO userDTO =new UserDTO(firstName,middleName,lastName,dateOfBirth,city,email,petName);
 
 	userDTOs.add(userDTO);
@@ -38,7 +39,7 @@ public class CsvHelper {
 	return userDTOs;
 	}catch(Exception e){
 	e.printStackTrace();
-	throw new RuntimeException();
+	throw new RuntimeException(); 
 	}
 	}
 

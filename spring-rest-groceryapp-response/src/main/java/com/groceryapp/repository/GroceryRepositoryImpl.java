@@ -21,28 +21,21 @@ public class GroceryRepositoryImpl implements IGroceryRepository{
 		Object groceryAry[]= {grocery.getGroceryName(),grocery.getBrand(),grocery.getCategory(),grocery.getPrice(),grocery.getSize()};
 		jdbcTempate.update(sql, groceryAry);
 	}
-
 	@Override
 	public void updateGrocery(int id, double price) {
 		String sql="update grocery set price=? where groceryId=?";
-		jdbcTempate.update(sql, price,id);
-		
+		jdbcTempate.update(sql, price,id);		
 	}
-
 	@Override
 	public void deleteGrocery(int id) {
 		String sql="delete from grocery where groceryId=?";
-		jdbcTempate.update(sql, id);
-		
+		jdbcTempate.update(sql, id);		
 	}
-
 	@Override
 	public List<Grocery> findAll() {
 		String sql="select * from grocery";
-		return jdbcTempate.query(sql, new GroceryMapper());
-		
+		return jdbcTempate.query(sql, new GroceryMapper());		
 	}
-
 	@Override
 	public Optional<Grocery> findById(int id) {
 		String sql="select * from grocery where groceryId=?";

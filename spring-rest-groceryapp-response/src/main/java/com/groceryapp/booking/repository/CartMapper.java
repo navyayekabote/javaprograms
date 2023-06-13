@@ -15,7 +15,7 @@ public class CartMapper implements RowMapper<Cart> {
 		cart.setGroceryName(rs.getString("name"));
 		cart.setBrand(rs.getString("brand"));
 		cart.setPrice(rs.getDouble("price"));
-		cart.setSize(rs.getString("size"));
+		cart.setSize(rs.getString("gsize"));
 		cart.setCartId(rs.getInt("cartId"));
 		return cart;
 	}

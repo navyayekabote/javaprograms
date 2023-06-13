@@ -99,8 +99,11 @@ public class UserDTO {
 	}
 	@Override
 	public String toString() {
-		return "UserDTO [userid=" + userid + ", password=" + password + "]";
+		return "UserDTO [firstName=" + firstName + ", middleName=" + middleName + ", lastName=" + lastName
+				+ ", dateOfBirth=" + dateOfBirth + ", city=" + city + ", email=" + email + ", petName=" + petName
+				+ ", userid=" + userid + ", password=" + password + "]";
 	}
+	
 	
 	
 	

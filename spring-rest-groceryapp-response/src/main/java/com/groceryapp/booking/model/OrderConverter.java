@@ -1,4 +1,4 @@
-package com.groceryapp.booking.model;
+ package com.groceryapp.booking.model;
 
 import org.springframework.stereotype.Component;
 

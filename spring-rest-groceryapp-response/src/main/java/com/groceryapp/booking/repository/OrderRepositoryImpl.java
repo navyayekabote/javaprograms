@@ -14,22 +14,22 @@ public class OrderRepositoryImpl implements IOrderRepository{
 	private JdbcTemplate jdbcTemplate;
 	@Override
 	public void addOrder(Order order) {
-		String sql="insert into order (groceryId,userId,orderId) values(?,?,orderseq.nextval)";
+		String sql="insert into orders (groceryId,userId,orderId) values(?,?,orderseq.nextval)";
 		jdbcTemplate.update(sql,order.getGroceryId(),order.getUserId());
 		
 	}
 
 	@Override
 	public void deleteOrder(int orderId) {
-		String sql="delete from order where orderId=? ";
+		String sql="delete from orders where orderId=? ";
 		jdbcTemplate.update(sql, orderId);
 		
 	}
 
 	@Override
-	public List<Order> getAll() {
-		String sql="select g.groceryName,g.brand,g.price,g.size,c.cartId from grocery g inner join order d on g.groceryId=o.groceryId";
-		return jdbcTemplate.query(sql, new OrderMapper());
+	public List<Order> getAll(String userId) {
+		String sql="select name,brand,price,gsize,orderId from grocery,orders where grocery.groceryId=orders.groceryId and orders.userId=?";
+		return jdbcTemplate.query(sql, new OrderMapper(),userId);
 	}
 
 }

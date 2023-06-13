@@ -24,10 +24,16 @@ public class CartServiceImpl implements ICartService{
 	}
 
 	@Override
-	public List<CartDTO> getAll() {
+	public List<CartDTO> getAll(String userId) {
 		
-		List<Cart> carts=cartRepository.getAll();
+		List<Cart> carts=cartRepository.getAll(userId);
 		return carts.stream().map((cart)->cartConverter.toDTO(cart)).collect(Collectors.toList());
+	}
+
+	@Override
+	public void deleteCart(int cartId) {
+		cartRepository.deleteCart(cartId);
+		
 	}
 
 }

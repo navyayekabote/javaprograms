@@ -1,4 +1,4 @@
-package com.groceryapp.booking.service;
+  package com.groceryapp.booking.service;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,8 +29,8 @@ public class OrderServiceImpl implements IOrderService{
 	}
 
 	@Override
-	public List<OrderDTO> getAll() {
-		List<Order> orders=orderRepository.getAll();
+	public List<OrderDTO> getAll(String userId) {
+		List<Order> orders=orderRepository.getAll(userId);
 		return orders.stream().map((order)->orderConverter.toDTO(order)).collect(Collectors.toList());
 	}
 

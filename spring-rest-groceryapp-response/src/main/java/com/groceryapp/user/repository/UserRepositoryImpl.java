@@ -32,7 +32,7 @@ public class UserRepositoryImpl implements IUserRepository{
 	}
 
 	@Override
-	public void deleteUser(String uid) {
+	public void deleteUser(String uid) throws UserNotFoundException{
 		jdbcTemplate.update(Queries.deleteQuery,uid);
 		
 	}
@@ -55,7 +55,7 @@ public class UserRepositoryImpl implements IUserRepository{
 	}
 
 	@Override
-	public List<Grocery> getByEmailPassword(String email, int password) {
+	public List<Grocery> getByEmailPassword(String email, int password) throws UserNotFoundException{
 		User user=jdbcTemplate.queryForObject(Queries.getByEmailPassword,new UserMapper(),email,password);
 		User nuser=Optional.of(user)
 							.orElseThrow(()->new UserNotFoundException("user not found with that email,password"));

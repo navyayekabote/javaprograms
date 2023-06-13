@@ -8,5 +8,5 @@ import com.groceryapp.booking.model.OrderDTO;
 public interface IOrderService {
 	void addOrder(Order order);
 	void deleteOrder(int orderId);
-	List<OrderDTO> getAll();
+	List<OrderDTO> getAll(String userId);
 }

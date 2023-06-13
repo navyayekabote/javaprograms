@@ -7,5 +7,6 @@ import com.groceryapp.booking.model.CartDTO;
 
 public interface ICartService {
 	void addCart(Cart cart);
-	List<CartDTO> getAll();
+	List<CartDTO> getAll(String userId);
+	void deleteCart(int cartId);
 }

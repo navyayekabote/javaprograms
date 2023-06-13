@@ -15,7 +15,7 @@ public class OrderMapper implements RowMapper<Order> {
 		order.setGroceryName(rs.getString("name"));
 		order.setBrand(rs.getString("brand"));
 		order.setPrice(rs.getDouble("price"));
-		order.setSize(rs.getString("size"));
+		order.setSize(rs.getString("gsize"));
 		order.setOrderId(rs.getInt("orderId"));
 		return order;
 	}

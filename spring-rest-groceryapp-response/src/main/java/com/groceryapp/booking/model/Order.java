@@ -7,7 +7,7 @@ public class Order {
 	private String category;
 	private double price;
 	private String size;
-	private int userId;
+	private String userId;
 	private int orderId;
 	public int getGroceryId() {
 		return groceryId;
@@ -45,10 +45,10 @@ public class Order {
 	public void setSize(String size) {
 		this.size = size;
 	}
-	public int getUserId() {
+	public String getUserId() {
 		return userId;
 	}
-	public void setUserId(int userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 	public int getOrderId() {
@@ -58,7 +58,7 @@ public class Order {
 		this.orderId = orderId;
 	}
 	public Order(int groceryId, String groceryName, String brand, String category, double price, String size,
-			int userId, int orderId) {
+			String userId, int orderId) {
 		super();
 		this.groceryId = groceryId;
 		this.groceryName = groceryName;

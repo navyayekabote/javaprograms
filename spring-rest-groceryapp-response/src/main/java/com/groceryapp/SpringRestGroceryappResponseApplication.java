@@ -22,11 +22,11 @@ public class SpringRestGroceryappResponseApplication implements CommandLineRunne
 	@Autowired
 	private CsvHelper csvHelper;
 
-	@Override
+	//@Override
 	public void run(String... args) throws Exception {
-		List<UserDTO> userList=csvHelper.getUserDTOList("user.csv");
-		userList.stream().forEach((userDto)->userService.addUser(userDto));
-		
+//		List<UserDTO> userList=csvHelper.getUserDTOList("user.csv");
+//		userList.stream().forEach((userDto)->userService.addUser(userDto));
+//		
 	}
 
 }

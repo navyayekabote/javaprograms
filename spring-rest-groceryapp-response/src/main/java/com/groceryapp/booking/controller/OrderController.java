@@ -23,26 +23,34 @@ import com.groceryapp.booking.service.IOrderService;
 public class OrderController {
 	@Autowired
 	private IOrderService orderService;
+
+	// ordering the items by using userId ,groceryId
+	// http://localhost:8080/order-api/orders
 	@PostMapping("/orders")
-	ResponseEntity<Void> addOrder(@RequestBody Order order){
+	ResponseEntity<Void> addOrder(@RequestBody Order order) {
 		orderService.addOrder(order);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info","ordering the item");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", "ordering the item");
 		return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).build();
 	}
-	@GetMapping("/orders")
-	ResponseEntity<List<OrderDTO>> getAll(){
-		List<OrderDTO> orderDto=orderService.getAll();
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info"," cart details by id");
+
+	// getting all the orders of that particular user using userId
+	// http://localhost:8080/order-api/orders/userId/
+	@GetMapping("/orders/userId/{userId}")
+	ResponseEntity<List<OrderDTO>> getAll(@PathVariable("userId") String userId) {
+		List<OrderDTO> orderDto = orderService.getAll(userId);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", " cart details by id");
 		return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(orderDto);
 	}
+
+	// cancelling the order using orderId
+	// http://localhost:8080/order-api/orders/orderId/
 	@DeleteMapping("/orders/orderId/{orderId}")
-	ResponseEntity<Void> cancelOrder(@PathVariable("orderId") int orderId)
-	{
+	ResponseEntity<Void> cancelOrder(@PathVariable("orderId") int orderId) {
 		orderService.deleteOrder(orderId);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info","cancelling the order");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", "cancelling the order");
 		return ResponseEntity.status(HttpStatus.ACCEPTED).headers(httpHeaders).build();
 	}
 }

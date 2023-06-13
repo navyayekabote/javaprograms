@@ -91,7 +91,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		
 	}
 	@ExceptionHandler(UserNotFoundException.class)
-	public ResponseEntity<Object> handleUserNotfound(UserNotFoundException ex){
+	public ResponseEntity<Object> handleUserNotFound(UserNotFoundException ex){
 		String message=ex.getMessage();
 		List<Object> error=Arrays.asList("user not available");
 		HttpHeaders httpHeaders=new HttpHeaders();
@@ -101,12 +101,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders).body(errors);
 		
 	}
+	
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<Object> handleException(Exception ex){
+	public ResponseEntity<Object> handleException(Exception ex)throws Exception{
 		String message=ex.getMessage();
 		List<Object> error=Arrays.asList("other");
 		HttpHeaders httpHeaders=new HttpHeaders();
 		httpHeaders.add("info","other exceptions raised");
+		System.out.println("Error message ->"+message);
+		if(message.equals("Incorrect result size: expected 1, actual 0")) {
+			message="user not found";
+		}
 		ApiErrors errors=
 				new ApiErrors(LocalDateTime.now(),message,HttpStatus.INTERNAL_SERVER_ERROR,HttpStatus.INTERNAL_SERVER_ERROR.value(),error);
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).headers(httpHeaders).body(errors);	

@@ -14,15 +14,20 @@ public class CartRepositoryImpl implements ICartRepository{
 	private JdbcTemplate jdbcTemplate; 
 	@Override
 	public void addCart(Cart cart) {
-		String sql="insert into cart (groceryId,cartId) values(?,cartseq.nextval)";
-		jdbcTemplate.update(sql,cart.getGroceryId());
+		String sql="insert into cart (groceryId,userId,cartId) values(?,?,cartseq.nextval)";
+		jdbcTemplate.update(sql,cart.getGroceryId(),cart.getUserId());
 		
 	}
-
 	@Override
-	public List<Cart> getAll() {
-		String sql="select g.groceryName,g.brand,g.price,g.size,c.cartId from grocery g inner join cart c on g.groceryId=g.cartId";
-		return jdbcTemplate.query(sql,new CartMapper());
+	public List<Cart> getAll(String userId) {
+		String sql="select name,brand,price,gsize,cartId from grocery,cart where grocery.groceryId=cart.groceryId and cart.userId=?";
+		return jdbcTemplate.query(sql,new CartMapper(),userId);
+	}
+	@Override
+	public void deleteCart(int cartId) {
+		String sql="delete from cart where cartId=?";
+		jdbcTemplate.update(sql, cartId);
+		
 	}
 
 }

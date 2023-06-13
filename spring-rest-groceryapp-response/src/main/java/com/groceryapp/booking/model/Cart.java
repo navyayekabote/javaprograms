@@ -8,6 +8,13 @@ public class Cart {
 	private double price;
 	private String size;
 	private int cartId;
+	private String userId;
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 	public int getGroceryId() {
 		return groceryId;
 	}
@@ -51,7 +58,7 @@ public class Cart {
 		this.cartId = cartId;
 	}
 	public Cart(int groceryId, String groceryName, String brand, String category, double price, String size,
-			int cartId) {
+			int cartId,String userId) {
 		super();
 		this.groceryId = groceryId;
 		this.groceryName = groceryName;
@@ -60,6 +67,7 @@ public class Cart {
 		this.price = price;
 		this.size = size;
 		this.cartId = cartId;
+		this.userId=userId;
 	}
 	public Cart() {
 		super();
@@ -67,8 +75,9 @@ public class Cart {
 	}
 	@Override
 	public String toString() {
-		return "Cart [groceryName=" + groceryName + ", brand=" + brand + ", category=" + category + ", price=" + price
-				+ ", size=" + size + "]";
+		return "Cart [groceryId=" + groceryId + ", groceryName=" + groceryName + ", brand=" + brand + ", category="
+				+ category + ", price=" + price + ", size=" + size + ", cartId=" + cartId + ", userId=" + userId + "]";
 	}
+	
 	
 }

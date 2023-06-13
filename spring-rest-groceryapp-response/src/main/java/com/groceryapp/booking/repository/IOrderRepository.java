@@ -7,5 +7,5 @@ import com.groceryapp.booking.model.Order;
 public interface IOrderRepository {
 	void addOrder(Order order);
 	void deleteOrder(int orderId);
-	List<Order> getAll();
+	List<Order> getAll(String userId);
 }

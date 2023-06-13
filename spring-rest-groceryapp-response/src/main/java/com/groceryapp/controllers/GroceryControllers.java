@@ -27,83 +27,97 @@ public class GroceryControllers {
 		super();
 		this.groceryService = groceryService;
 	}
+
+	// adding the values to the groceries
 	@PostMapping("/groceries")
-	ResponseEntity<Void> addGrocery(@RequestBody Grocery grocery){
+	ResponseEntity<Void> addGrocery(@RequestBody Grocery grocery) {
 		groceryService.addGrocery(grocery);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info","adding one grocery ");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", "adding one grocery ");
 		return ResponseEntity.status(HttpStatus.CREATED).headers(httpHeaders).build();
 	}
-	//http://localhost:8080/grocery-api/groceries/groceryId/3/price/75
+
+	// http://localhost:8080/grocery-api/groceries/groceryId/3/price/75
 	@PatchMapping("/groceries/groceryId/{id}/price/{price}")
-	ResponseEntity<Void> updateGrocery(@PathVariable("id")int groceryId,@PathVariable("price")double price){
+	ResponseEntity<Void> updateGrocery(@PathVariable("id") int groceryId, @PathVariable("price") double price) {
 		groceryService.updateGrocery(groceryId, price);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info","updating the grocery details");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", "updating the grocery details");
 		return ResponseEntity.status(HttpStatus.ACCEPTED).headers(httpHeaders).build();
 	}
+
+	// http://localhost:8080/grocery-api/groceries/id/24
 	@DeleteMapping("/groceries/id/{groceryId}")
-	ResponseEntity<Void> deleteGrocery(@PathVariable("groceryId") int groceryId)
-	{
+	ResponseEntity<Void> deleteGrocery(@PathVariable("groceryId") int groceryId) {
 		groceryService.deleteGrocery(groceryId);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info","deleting the grocery details");
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", "deleting the grocery details");
 		return ResponseEntity.status(HttpStatus.ACCEPTED).headers(httpHeaders).build();
 	}
+
 	@GetMapping("/groceries")
-	ResponseEntity<List<Grocery>> getAll(){
-		List<Grocery> groceries=groceryService.getAll();
+	ResponseEntity<List<Grocery>> getAll() {
+		List<Grocery> groceries = groceryService.getAll();
 		return ResponseEntity.status(HttpStatus.OK).body(groceries);
 	}
-	@GetMapping("/groceries/id/{groceryId}")
-	ResponseEntity<Grocery> getById(@PathVariable("groceryId")int id){
-		Grocery grocery=groceryService.getById(id);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info"," grocery details by id");
+
+	@GetMapping("/groceries/groceryId/{groceryId}")
+	ResponseEntity<Grocery> getById(@PathVariable("groceryId") int id) {
+		Grocery grocery = groceryService.getById(id);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", " grocery details by id");
 		return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(grocery);
 	}
+	//http://localhost:8080/grocery-api/groceries/name/mangoes
 	@GetMapping("/groceries/name/{name}")
-	ResponseEntity<List<Grocery>> getByName(@PathVariable("name")String name){
-		List<Grocery> groceries=groceryService.getByName(name);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info"," grocery details by name");
+	ResponseEntity<List<Grocery>> getByName(@PathVariable("name") String name) {
+		List<Grocery> groceries = groceryService.getByName(name);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", " grocery details by name");
 		return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(groceries);
 	}
+
 	@GetMapping("/groceries/brand/{brand}")
-	ResponseEntity<List<Grocery>> getByBrand(@PathVariable("brand") String brand){
-		List<Grocery> groceries=groceryService.getByBrand(brand);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info"," grocery details by brand");
+	ResponseEntity<List<Grocery>> getByBrand(@PathVariable("brand") String brand) {
+		List<Grocery> groceries = groceryService.getByBrand(brand);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", " grocery details by brand");
 		return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(groceries);
 	}
+
 	@GetMapping("/groceries/category/{category}")
-	ResponseEntity<List<Grocery>> getByNameBrand(@PathVariable("category")String category){
-		List<Grocery> groceries=groceryService.getByCategory(category);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info"," book details by category");
+	ResponseEntity<List<Grocery>> getByNameBrand(@PathVariable("category") String category) {
+		List<Grocery> groceries = groceryService.getByCategory(category);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", " book details by category");
 		return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(groceries);
 	}
+
 	@GetMapping("/groceries/name/{name}/brand/{brand}")
-	ResponseEntity<List<Grocery>> getByNameBrand(@PathVariable("name")String name,@PathVariable("brand") String brand){
-		List<Grocery> groceries=groceryService.getByNameBrand(name, brand);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info"," grocery details by name and brand");
+	ResponseEntity<List<Grocery>> getByNameBrand(@PathVariable("name") String name,
+			@PathVariable("brand") String brand) {
+		List<Grocery> groceries = groceryService.getByNameBrand(name, brand);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", " grocery details by name and brand");
 		return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(groceries);
 	}
+
 	@GetMapping("/groceries/name/{name}/price/{price}")
-	ResponseEntity<List<Grocery>> getByNamePrice(@PathVariable("name")String name,@PathVariable("price")double price ){
-		List<Grocery> groceries=groceryService.getByNameAndPriceLessthan(name, price);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info","grocery details by name and price");
+	ResponseEntity<List<Grocery>> getByNamePrice(@PathVariable("name") String name,
+			@PathVariable("price") double price) {
+		List<Grocery> groceries = groceryService.getByNameAndPriceLessthan(name, price);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", "grocery details by name and price");
 		return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(groceries);
 	}
+
 	@GetMapping("/groceries/name/{name}/brand/{brand}/size/{size}")
-	ResponseEntity<List<Grocery>> getByNameBrandsize(@PathVariable("name")String name,@PathVariable("brand") String brand,@PathVariable("size")String size){
-		List<Grocery> groceries=groceryService.getByNameBrandSize(name, brand, size);
-		HttpHeaders httpHeaders=new HttpHeaders();
-		httpHeaders.add("info"," grocery details by name,brand,size");
+	ResponseEntity<List<Grocery>> getByNameBrandsize(@PathVariable("name") String name,
+			@PathVariable("brand") String brand, @PathVariable("size") String size) {
+		List<Grocery> groceries = groceryService.getByNameBrandSize(name, brand, size);
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("info", " grocery details by name,brand,size");
 		return ResponseEntity.status(HttpStatus.OK).headers(httpHeaders).body(groceries);
 	}
-	
-	
+
 }
